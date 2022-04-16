@@ -9,6 +9,7 @@ fn main() {
 
     println!("Welcome to rusty ropes!");
     let mut guessed_letters = Vec::new();
+    let mut str_guessed_letters = String::new();
 
     loop {
         let mut guess_letter = String::new();
@@ -17,8 +18,18 @@ fn main() {
 
         if guessed_letters.len() > 0 {
             // TODO convert vec into chars and concat into a string
-            println!("Letters guessed: {:?}", guessed_letters);
+            for i in &guessed_letters {
+                // print!("{}", i);
+                str_guessed_letters.push(i)
+            }
+
+            // println!("Letters guessed: {:?}", guessed_letters);
         }
+
+        // if str_guessed_letters.len() > 0 {
+        //     println!("{}", str_guessed_letters);
+        // }
+
         println!("Guess a letter or word? (L/W)");
 
         println!("guess_type: {}", guess_type);
@@ -34,8 +45,6 @@ fn main() {
                 .read_line(&mut guess_word)
                 .expect("Failed to read line");
 
-            // need to reset guess but this errors out
-            // guess_type = "";
         } else if guess_type.trim() == "L" {
             println!("Guess a letter");
 
@@ -44,6 +53,9 @@ fn main() {
                 .expect("Failed to read line");
 
             guessed_letters.push(guess_letter);
+            // str_guessed_letters.push_str(guess_letter);
+            // str_guessed_letters.push(guess_letter);
+            // str_guessed_letters.push('y');
         } else if guess_type.trim() == "exit" {
             break
         }
