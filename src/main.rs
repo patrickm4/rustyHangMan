@@ -8,7 +8,6 @@ fn main() {
     // need to show already guessed letters and not allow user to guess the same letter again
 
     println!("Welcome to rusty ropes!");
-    // let mut guessed_letters: Vec<String> = Vec::new();
     let _guessed_letters: Vec<String> = Vec::new();
     let mut str_guessed_letters = String::new();
 
@@ -17,21 +16,11 @@ fn main() {
         let mut guess_word = String::new();
         let mut guess_type = String::new();
 
-        // if guessed_letters.len() > 0 {
-        //     // TODO convert vec into chars and concat into a string
-        //     for i in &guessed_letters {
-        //         // print!("{}", i);
-        //         str_guessed_letters.push(i)
-        //     }
-        //
-        //     // println!("Letters guessed: {:?}", guessed_letters);
-        // }
-
         if str_guessed_letters.len() > 0 {
             println!("{}", str_guessed_letters);
         }
 
-        println!("Guess a letter or word? (L/W)");
+        println!("Guess a letter, word or stop playing? (L/W/S)");
 
         println!("guess_type: {}", guess_type);
 
@@ -53,12 +42,9 @@ fn main() {
                 .read_line(&mut guess_letter)
                 .expect("Failed to read line");
 
-            // guessed_letters.push(guess_letter);
-            // guess_letter.push(',');
             str_guessed_letters.push_str(&guess_letter.trim());
-            // str_guessed_letters.push(guess_letter);
-            // str_guessed_letters.push('y');
-        } else if guess_type.trim() == "exit" {
+        } else if guess_type.trim().to_lowercase() == "s" {
+            println!("Bye!");
             break
         }
     }
