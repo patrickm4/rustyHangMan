@@ -1,7 +1,11 @@
 use std::io;
+use rand::Rng;
 
 fn main() {
     // we need to choose a random word
+    let cars = ["acura", "bmw", "alfa romeo", "aston martin", "honda", "toyota"];
+    let random_num = rand::thread_rng().gen_range(0..6);
+    let magic_word = cars[random_num];
 
     // then show a clue and the amount of letters needed
 
