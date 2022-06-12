@@ -39,6 +39,12 @@ fn main() {
                 .read_line(&mut guess_word)
                 .expect("Failed to read line");
 
+            if guess_word.trim().to_lowercase() == magic_word {
+                println!("You win!");
+                break
+            } else {
+                println!("Wrong! Try again");
+            }
         } else if guess_type.trim() == "L" {
             println!("Guess a letter");
 
