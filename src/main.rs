@@ -7,13 +7,20 @@ fn main() {
     let random_num = rand::thread_rng().gen_range(0..6);
     let magic_word = cars[random_num];
 
-    // then show a clue and the amount of letters needed
+    // TODO then show a clue and the amount of letters needed
 
-    // need to show already guessed letters and not allow user to guess the same letter again
+    // TODO need to not allow user to guess the same letter again
 
     println!("Welcome to rusty ropes!");
     let _guessed_letters: Vec<String> = Vec::new();
     let mut str_guessed_letters = String::new();
+    let mut person_to_hang = String::new();
+    let mut hang_counter: u8 = 0;
+
+    // |
+    // O͍
+   // /|\
+   // / \
 
     loop {
         let mut guess_letter = String::new();
@@ -48,11 +55,18 @@ fn main() {
         } else if guess_type.trim() == "L" {
             println!("Guess a letter");
 
+
             io::stdin()
                 .read_line(&mut guess_letter)
                 .expect("Failed to read line");
 
             str_guessed_letters.push_str(&guess_letter.trim());
+
+            // TODO If word doesnt contain the letter draw the person
+            if magic_word.contains(&guess_letter.trim().to_lowercase()) {
+                println!("letter in word!")
+            }
+
         } else if guess_type.trim().to_lowercase() == "s" {
             println!("Bye!");
             break
