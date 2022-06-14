@@ -17,11 +17,6 @@ fn main() {
     let mut person_to_hang = String::new();
     let mut hang_counter: u8 = 0;
 
-    // |
-    // O͍
-   // /|\
-   // / \
-
     loop {
         let mut guess_letter = String::new();
         let mut guess_word = String::new();
@@ -29,6 +24,10 @@ fn main() {
 
         if str_guessed_letters.len() > 0 {
             println!("{}", str_guessed_letters);
+        }
+
+        if hang_counter > 0 {
+            println!("{}", person_to_hang);
         }
 
         println!("Guess a letter, word or stop playing? (L/W/S)");
@@ -65,6 +64,21 @@ fn main() {
             // TODO If word doesnt contain the letter draw the person
             if magic_word.contains(&guess_letter.trim().to_lowercase()) {
                 println!("letter in word!")
+            } else {
+                if hang_counter == 0 {
+                    person_to_hang.push_str(" | ");
+                } else if hang_counter == 1 {
+                    person_to_hang.push_str("\n O͍ ");
+                } else if hang_counter == 2 {
+                    person_to_hang.push_str("\n/|\\");
+                } else if hang_counter == 3 {
+                    person_to_hang.push_str("\n/ \\");
+                    println!("{}", person_to_hang);
+                    println!("You Lose!");
+                    break
+                }
+
+                hang_counter = hang_counter + 1
             }
 
         } else if guess_type.trim().to_lowercase() == "s" {
