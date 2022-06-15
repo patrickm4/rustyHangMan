@@ -17,10 +17,22 @@ fn main() {
     let mut person_to_hang = String::new();
     let mut hang_counter: u8 = 0;
 
+    let magic_word_amount = magic_word.chars().count();
+
+    let mut word_in_progress: Vec<String> = Vec::new();
+
+    for _e in 0..magic_word_amount {
+        word_in_progress.push("_".to_string())
+    }
+
+    // println!("{} {} {:?}", magic_word, magic_word_amount, word_in_progress);
+
     loop {
         let mut guess_letter = String::new();
         let mut guess_word = String::new();
         let mut guess_type = String::new();
+
+        println!("Word to guess: {}", word_in_progress.join(" "));
 
         if str_guessed_letters.len() > 0 {
             println!("{}", str_guessed_letters);
@@ -59,11 +71,21 @@ fn main() {
                 .read_line(&mut guess_letter)
                 .expect("Failed to read line");
 
-            str_guessed_letters.push_str(&guess_letter.trim());
+            let guessed_letter = guess_letter.trim().to_lowercase();
 
-            // TODO If word doesnt contain the letter draw the person
-            if magic_word.contains(&guess_letter.trim().to_lowercase()) {
-                println!("letter in word!")
+            str_guessed_letters.push_str(&guessed_letter);
+
+            if magic_word.contains(&guessed_letter) {
+                println!("letter in word!");
+                // TODO fill word if letter is correct
+
+                // find index letter is at
+                let index = magic_word.position(|c| c == &guessed_letter).unwrap();
+
+                dbg!(index);
+                // use index to place letter
+
+
             } else {
                 if hang_counter == 0 {
                     person_to_hang.push_str(" | ");
