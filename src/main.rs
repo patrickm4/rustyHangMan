@@ -80,24 +80,30 @@ fn main() {
                 // TODO fill word if letter is correct
 
                 // find index letter is at
-                let index = magic_word.position(|c| c == &guessed_letter).unwrap();
+                //let index = magic_word.find(&guessed_letter);
+                //let index = magic_word.chars().position(|c| c == &guessed_letter).unwrap();
 
-                dbg!(index);
+                // loop thru magic word to find all instancecs of the letters
+                //for letter in magic_word.chars() {
+                //    println!("{}", letter);
+                //}
+
+                // dbg!(index);
                 // use index to place letter
 
 
             } else {
-                if hang_counter == 0 {
-                    person_to_hang.push_str(" | ");
-                } else if hang_counter == 1 {
-                    person_to_hang.push_str("\n O͍ ");
-                } else if hang_counter == 2 {
-                    person_to_hang.push_str("\n/|\\");
-                } else if hang_counter == 3 {
-                    person_to_hang.push_str("\n/ \\");
-                    println!("{}", person_to_hang);
-                    println!("You Lose!");
-                    break
+                match hang_counter {
+                    0 => person_to_hang.push_str(" | "),
+                    1 => person_to_hang.push_str("\n O͍ "),
+                    2 => person_to_hang.push_str("\n/|\\"),
+                    3 => {
+                        person_to_hang.push_str("\n/ \\");
+                        println!("{}", person_to_hang);
+                        println!("You Lose!");
+                        break
+                    },
+                    _ => println!("No Match"),
                 }
 
                 hang_counter = hang_counter + 1
