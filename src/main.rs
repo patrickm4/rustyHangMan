@@ -76,11 +76,11 @@ fn main() {
             str_guessed_letters.push_str(&guessed_letter);
 
             if magic_word.contains(&guessed_letter) {
-                println!("letter in word!");
+                println!("letter in word! {:?}", word_in_progress);
                 // TODO fill word if letter is correct
 
                 // find index letter is at
-                //let index = magic_word.find(&guessed_letter);
+                let index = magic_word.find(&guessed_letter);
                 //let index = magic_word.chars().position(|c| c == &guessed_letter).unwrap();
 
                 // loop thru magic word to find all instancecs of the letters
@@ -88,7 +88,12 @@ fn main() {
                 //    println!("{}", letter);
                 //}
 
-                // dbg!(index);
+                let plusIndex: u8 = index + 1;
+
+                // std::mem::replace(&mut word_in_progress[index], &guessed_letter);
+                word_in_progress.replace_range(index..plusIndex, &guessed_letter);
+
+                dbg!(index);
                 // use index to place letter
 
 
