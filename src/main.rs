@@ -31,6 +31,7 @@ fn main() {
         let mut guess_letter = String::new();
         let mut guess_word = String::new();
         let mut guess_type = String::new();
+        let mut guessed_letter = String::new();
 
         println!("Word to guess: {}", word_in_progress.join(" "));
 
@@ -71,7 +72,7 @@ fn main() {
                 .read_line(&mut guess_letter)
                 .expect("Failed to read line");
 
-            let guessed_letter = guess_letter.trim().to_lowercase();
+            guessed_letter = guess_letter.trim().to_lowercase();
 
             str_guessed_letters.push_str(&guessed_letter);
 
@@ -79,15 +80,20 @@ fn main() {
                 println!("letter in word! {:?}", word_in_progress);
                 // TODO fill word if letter is correct
 
-                // find index letter is at
-                let index = magic_word.find(&guessed_letter);
 
                 // get all instances of the letter
-                let v: Vec<_> = magic_word.match_indices(&guessed_letter).collect();
+                let letter_matches: Vec<_> = magic_word.match_indices(&guessed_letter).collect();
 
-                println!("yeeet {:?}", v);
+                // println!("yeeet1 {:?}", letter_matches);
+                // println!("yeeet2 {:?}", letter_matches[0].0);
 
-                //let index = magic_word.chars().position(|c| c == &guessed_letter).unwrap();
+                for letter_and_position in letter_matches {
+                    println!("yeeeeeeeet {:?}", letter_and_position.0);
+
+                    // std::mem::replace(&mut word_in_progress[letter_and_position.0], &guessed_letter);
+
+                    word_in_progress[letter_and_position.0] = guessed_letter;
+                }
 
                 // loop thru magic word to find all instancecs of the letters
                 //for letter in magic_word.chars() {
@@ -95,13 +101,13 @@ fn main() {
                 //}
 
 
-                // std::mem::replace(&mut word_in_progress[index], &guessed_letter);
+
                 // let plusIndex: u8 = index + 1;
                 // word_in_progress.replace_range(index..plusIndex, &guessed_letter);
 
                 // let things = str::replace(word_in_progress);
 
-                dbg!(index);
+                // dbg!(index);
                 // use index to place letter
 
 
