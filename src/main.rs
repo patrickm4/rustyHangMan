@@ -92,8 +92,9 @@ fn main() {
 
                     // std::mem::replace(&mut word_in_progress[letter_and_position.0], &guessed_letter);
 
-                    word_in_progress[letter_and_position.0] = guessed_letter;
+                    word_in_progress[letter_and_position.0] = guessed_letter.clone();
                 }
+                // word_in_progress[0] = guessed_letter;
 
                 // loop thru magic word to find all instancecs of the letters
                 //for letter in magic_word.chars() {
