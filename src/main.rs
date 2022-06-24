@@ -77,39 +77,19 @@ fn main() {
             str_guessed_letters.push_str(&guessed_letter);
 
             if magic_word.contains(&guessed_letter) {
-                println!("letter in word! {:?}", word_in_progress);
-                // TODO fill word if letter is correct
-
-
                 // get all instances of the letter
                 let letter_matches: Vec<_> = magic_word.match_indices(&guessed_letter).collect();
 
-                // println!("yeeet1 {:?}", letter_matches);
-                // println!("yeeet2 {:?}", letter_matches[0].0);
-
                 for letter_and_position in letter_matches {
-                    println!("yeeeeeeeet {:?}", letter_and_position.0);
-
-                    // std::mem::replace(&mut word_in_progress[letter_and_position.0], &guessed_letter);
 
                     word_in_progress[letter_and_position.0] = guessed_letter.clone();
                 }
-                // word_in_progress[0] = guessed_letter;
 
-                // loop thru magic word to find all instancecs of the letters
-                //for letter in magic_word.chars() {
-                //    println!("{}", letter);
-                //}
-
-
-
-                // let plusIndex: u8 = index + 1;
-                // word_in_progress.replace_range(index..plusIndex, &guessed_letter);
-
-                // let things = str::replace(word_in_progress);
-
-                // dbg!(index);
-                // use index to place letter
+                if !word_in_progress.contains(&"_".to_owned()) {
+                    println!("{:?}", word_in_progress.join(""));
+                    println!("WIN");
+                    break
+                }
 
 
             } else {
