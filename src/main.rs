@@ -7,8 +7,6 @@ fn main() {
     let random_num = rand::thread_rng().gen_range(0..6);
     let magic_word = cars[random_num];
 
-    // TODO then show a clue and the amount of letters needed
-
     // TODO need to not allow user to guess the same letter again
 
     println!("Welcome to rusty ropes!");
@@ -21,11 +19,16 @@ fn main() {
 
     let mut word_in_progress: Vec<String> = Vec::new();
 
-    for _e in 0..magic_word_amount {
-        word_in_progress.push("_".to_string())
+    //TODO if space don't add underscore, rn program panics
+    for e in 0..magic_word_amount {
+        if word_in_progress[e] == " " {
+            word_in_progress.push(" ".to_string());
+        } else {
+            word_in_progress.push("_".to_string());
+        }
     }
 
-    // println!("{} {} {:?}", magic_word, magic_word_amount, word_in_progress);
+    println!("{}", magic_word);
 
     loop {
         let mut guess_letter = String::new();
