@@ -19,9 +19,11 @@ fn main() {
 
     let mut word_in_progress: Vec<String> = Vec::new();
 
-    //TODO if space don't add underscore, rn program panics
     for e in 0..magic_word_amount {
-        if word_in_progress[e] == " " {
+        let b: u8 = magic_word.as_bytes()[e];
+        let c: char = b as char;
+
+        if c.is_whitespace() {
             word_in_progress.push(" ".to_string());
         } else {
             word_in_progress.push("_".to_string());
