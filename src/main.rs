@@ -28,15 +28,13 @@ fn main() {
         }
     }
 
-    println!("{}", magic_word);
-
     loop {
         let mut guess_letter = String::new();
         let mut guess_word = String::new();
         let mut guess_type = String::new();
         let mut guessed_letter = String::new();
 
-        println!("Word to guess: {}", word_in_progress.join(" "));
+        println!("Car Brand: {}", word_in_progress.join(" "));
 
         if str_guessed_letters.len() > 0 {
             println!("{}", str_guessed_letters);
@@ -48,13 +46,11 @@ fn main() {
 
         println!("Guess a letter, word or stop playing? (L/W/S)");
 
-        println!("guess_type: {}", guess_type);
-
         io::stdin()
             .read_line(&mut guess_type)
             .expect("Failed to read line");
 
-        if guess_type.trim() == "W" {
+        if guess_type.trim().to_lowercase() == "w" {
             println!("What's the word?");
 
             io::stdin()
@@ -67,8 +63,8 @@ fn main() {
             } else {
                 println!("Wrong! Try again");
             }
-        } else if guess_type.trim() == "L" {
-            println!("Guess a letter");
+        } else if guess_type.trim().to_lowercase() == "l" {
+            println!("Pick a letter");
 
 
             io::stdin()
