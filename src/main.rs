@@ -7,8 +7,6 @@ fn main() {
     let random_num = rand::thread_rng().gen_range(0..6);
     let magic_word = cars[random_num];
 
-    // TODO need to not allow user to guess the same letter again
-
     println!("Welcome to rusty ropes!");
     let _guessed_letters: Vec<String> = Vec::new();
     let mut str_guessed_letters = String::new();
@@ -79,39 +77,43 @@ fn main() {
 
             guessed_letter = guess_letter.trim().to_lowercase();
 
-            str_guessed_letters.push_str(&guessed_letter);
+            if str_guessed_letters.find(&guessed_letter) == None {
+                str_guessed_letters.push_str(&guessed_letter);
 
-            if magic_word.contains(&guessed_letter) {
-                // get all instances of the letter
-                let letter_matches: Vec<_> = magic_word.match_indices(&guessed_letter).collect();
+                if magic_word.contains(&guessed_letter) {
+                    // get all instances of the letter
+                    let letter_matches: Vec<_> = magic_word.match_indices(&guessed_letter).collect();
 
-                for letter_and_position in letter_matches {
+                    for letter_and_position in letter_matches {
 
-                    word_in_progress[letter_and_position.0] = guessed_letter.clone();
-                }
+                        word_in_progress[letter_and_position.0] = guessed_letter.clone();
+                    }
 
-                if !word_in_progress.contains(&"_".to_owned()) {
-                    println!("{:?}", word_in_progress.join(""));
-                    println!("WIN");
-                    break
-                }
-
-
-            } else {
-                match hang_counter {
-                    0 => person_to_hang.push_str(" | "),
-                    1 => person_to_hang.push_str("\n O͍ "),
-                    2 => person_to_hang.push_str("\n/|\\"),
-                    3 => {
-                        person_to_hang.push_str("\n/ \\");
-                        println!("{}", person_to_hang);
-                        println!("You Lose!");
+                    if !word_in_progress.contains(&"_".to_owned()) {
+                        println!("{:?}", word_in_progress.join(""));
+                        println!("WIN");
                         break
-                    },
-                    _ => println!("No Match"),
-                }
+                    }
 
-                hang_counter = hang_counter + 1
+
+                } else {
+                    match hang_counter {
+                        0 => person_to_hang.push_str(" | "),
+                        1 => person_to_hang.push_str("\n O͍ "),
+                        2 => person_to_hang.push_str("\n/|\\"),
+                        3 => {
+                            person_to_hang.push_str("\n/ \\");
+                            println!("{}", person_to_hang);
+                            println!("You Lose!");
+                            break
+                        },
+                        _ => println!("No Match"),
+                    }
+
+                    hang_counter = hang_counter + 1
+                }
+            } else {
+                println!("You chose this letter already!");
             }
 
         } else if guess_type.trim().to_lowercase() == "s" {
